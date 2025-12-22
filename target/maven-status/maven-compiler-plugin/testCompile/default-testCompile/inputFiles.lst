@@ -1,0 +1,3 @@
+/home/natalia/pasarela_demo/pasarela-orchestrator/backend/src/test/java/com/pasarela/application/PaymentIntentServiceFkTest.java
+/home/natalia/pasarela_demo/pasarela-orchestrator/backend/src/test/java/com/pasarela/application/WebhookServiceTest.java
+/home/natalia/pasarela_demo/pasarela-orchestrator/backend/src/test/java/com/pasarela/application/routing/RoutingEngineTest.java

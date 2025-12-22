@@ -1,0 +1,3 @@
+com/pasarela/application/WebhookServiceTest.class
+com/pasarela/application/routing/RoutingEngineTest.class
+com/pasarela/application/PaymentIntentServiceFkTest.class
