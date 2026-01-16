@@ -1,0 +1,65 @@
+server:
+  port: ${BACKEND_PORT:8080}
+  address: ${BACKEND_BIND_ADDRESS:127.0.0.1}
+
+spring:
+  datasource:
+    url: jdbc:sqlite:${DB_PATH:./data/pasarela.db}
+    driver-class-name: org.sqlite.JDBC
+    hikari:
+      connection-init-sql: PRAGMA foreign_keys=ON
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.community.dialect.SQLiteDialect
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+logging:
+  pattern:
+    level: "%5p [requestId=%X{requestId}]"
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.hibernate.engine.jdbc.spi.SqlExceptionHelper: ERROR
+
+app:
+  frontend:
+    baseUrl: ${FRONTEND_BASE_URL:http://localhost:3000}
+  jwt:
+    secret: ${JWT_SECRET:dev-jwt-secret-please-change-me-32-chars-minimum}
+    ttlSeconds: ${JWT_TTL_SECONDS:3600}
+  crypto:
+    encryptionKeyBase64: ${APP_ENCRYPTION_KEY_BASE64:NAyhesJG7rrNDRTEck3YiAZ11/nX6Bg08zqRBjPn4L8=}
+  providers:
+    stripe:
+      secretKey: ${STRIPE_SECRET_KEY:}
+      publishableKey: ${STRIPE_PUBLISHABLE_KEY:}
+      webhookSecret: ${STRIPE_WEBHOOK_SECRET:}
+    adyen:
+      apiKey: ${ADYEN_API_KEY:}
+      merchantAccount: ${ADYEN_MERCHANT_ACCOUNT:}
+      clientKey: ${ADYEN_CLIENT_KEY:}
+      hmacKey: ${ADYEN_HMAC_KEY:}
+      environment: ${ADYEN_ENVIRONMENT:test}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
